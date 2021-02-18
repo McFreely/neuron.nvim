@@ -13,7 +13,7 @@ local config = require("neuron/config")
 
 local M = {}
 
--- TODO
+-- OK
 function M.find_zettels(opts)
   opts = opts or {}
 
@@ -62,7 +62,7 @@ function M.find_backlinks(opts)
         entry_maker = neuron_entry.gen_from_links
       },
       previewer = previewers.vim_buffer_cat.new(opts),
-      sorter = conf.generic_sorter(opts)
+      sorter = sorters.get_fzy_sorter()
     }
 
     if opts.insert then
