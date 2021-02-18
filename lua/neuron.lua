@@ -51,7 +51,8 @@ function M.open_from_server()
   utils.os_open(utils.get_localhost_address(NeuronJob.address))
 end
 
-function M.enter_link()
+-- TODO split, vsplit via 'cmd' arg
+function M.enter_link(edit_cmd)
   local word = vim.fn.expand("<cWORD>")
 
   local id = utils.match_link(word)
@@ -63,7 +64,7 @@ function M.enter_link()
 
   cmd.query_id(id, config.neuron_dir, function(json)
     if type(json) ~= "userdata" then
-      vim.cmd(string.format("edit %s/%s.md", config.neuron_dir, json.ID))
+      vim.cmd(string.format("%s %s/%s.md", edit_cmd, config.neuron_dir, json.ID))
     end
   end)
 end

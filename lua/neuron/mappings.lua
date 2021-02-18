@@ -14,8 +14,9 @@ function M.map(key, rhs)
 end
 
 function M.set_keymaps()
-  api.nvim_buf_set_keymap(0, "n", "<CR>", ":lua require'neuron'.enter_link()<CR>", {noremap = true, silent = true})
-  M.map_buf("<CR>", "<cmd>lua require'neuron'.enter_link()<CR>")
+  M.map("j", ":lua require'neuron'.enter_link('edit')<CR>", {noremap = true, silent = true})
+  M.map("sj", ":lua require'neuron'.enter_link('split')<CR>", {noremap = true, silent = true})
+  M.map("vj", ":lua require'neuron'.enter_link('vsplit')<CR>", {noremap = true, silent = true})
 
   M.map_buf("n", "<cmd>lua require'neuron/cmd'.new_edit(require'neuron/config'.neuron_dir)<CR>")
 
