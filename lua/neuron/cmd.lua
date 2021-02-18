@@ -80,7 +80,7 @@ function M.json_stdout_wrap(json_fn)
   end
 end
 
-function M.new_edit(neuron_dir)
+function M.new_edit(neuron_dir, edit_cmd)
   Job:new {
     command = "neuron",
     args = {"new"},
@@ -91,7 +91,7 @@ function M.new_edit(neuron_dir)
       function(error, data)
         assert(not error, error)
 
-        vim.cmd("edit " .. data)
+        vim.cmd(edit_cmd .. " " .. data)
         utils.start_insert_header()
       end
     ),

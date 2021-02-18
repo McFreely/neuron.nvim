@@ -51,7 +51,6 @@ function M.open_from_server()
   utils.os_open(utils.get_localhost_address(NeuronJob.address))
 end
 
--- TODO split, vsplit via 'cmd' arg
 function M.enter_link(edit_cmd)
   local word = vim.fn.expand("<cWORD>")
 
