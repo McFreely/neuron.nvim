@@ -2,6 +2,7 @@ local pickers = require("telescope.pickers")
 local make_entry = require("telescope.make_entry")
 local finders = require("telescope.finders")
 local previewers = require("telescope.previewers")
+local sorters = require("telescope.sorters")
 local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local utils = require("neuron/utils")
@@ -12,18 +13,20 @@ local config = require("neuron/config")
 
 local M = {}
 
+-- TODO
 function M.find_zettels(opts)
   opts = opts or {}
 
   cmd.query({cached = opts.cached}, config.neuron_dir, function(json)
+    -- Custom telescope picker
     local picker_opts = {
       prompt_title = "Find Zettels",
-      finder = finders.new_table {
-        results = json,
-        entry_maker = neuron_entry.gen_from_zettels
+      finder = finders.new_table { 
+        results = json, -- results
+        entry_maker = neuron_entry.gen_from_zettels -- func to convert results to entries
       },
       previewer = previewers.vim_buffer_cat.new(opts),
-      sorter = conf.generic_sorter(opts)
+      sorter = sorters.get_fzy_sorter()
     }
 
     if opts.insert then
