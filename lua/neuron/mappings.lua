@@ -29,16 +29,18 @@ function M.set_keymaps()
   -- insert = true => create link
   -- does not create new note
   M.map_buf("fz", "<cmd>lua require'neuron/telescope'.find_zettels()<CR>")
+  M.map_buf("fa", "<cmd>lua require'neuron/telescope'.find_zettels {tag = 'garden', mode = 'normal'}<CR>")
   M.map_buf("fZ", "<cmd>lua require'neuron/telescope'.find_zettels {insert = true}<CR>")
 
   -- Show backlinks, ie: links going to note
   M.map_buf("b", "<cmd>lua require'neuron/telescope'.find_backlinks()<CR>")
   M.map_buf("B", "<cmd>lua require'neuron/telescope'.find_backlinks {insert = true}<CR>")
 
+  -- Show tags
   M.map_buf("t", "<cmd>lua require'neuron/telescope'.find_tags()<CR>")
 
   -- Launch web preview
-  M.map_buf("s", "<cmd>lua require'neuron'.rib()<CR>")
+  M.map_buf("sz", "<cmd>lua require'neuron'.rib()<CR>")
 
   M.map_buf("j", "<cmd>lua require'neuron'.goto_next_extmark()<CR>")
   M.map_buf("k", "<cmd>lua require'neuron'.goto_prev_extmark()<CR>")

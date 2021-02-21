@@ -37,6 +37,11 @@ function M.query_arg_maker(opts)
     table.insert(args, "--tags")
   end
 
+  if opts.tag then
+      local ins =  string.format("--tag=%s", opts.tag)
+      table.insert(args, ins)
+  end
+
   if opts.uri then
     table.insert(args, "--uri")
     table.insert(args, opts.uri)

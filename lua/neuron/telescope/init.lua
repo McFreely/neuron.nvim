@@ -13,14 +13,14 @@ local config = require("neuron/config")
 
 local M = {}
 
--- OK
 function M.find_zettels(opts)
-  opts = opts or {}
+  opts = opts or { mode = "insert" }
 
-  cmd.query({cached = opts.cached}, config.neuron_dir, function(json)
+  cmd.query({cached = opts.cached, tag = opts.tag}, config.neuron_dir, function(json)
     -- Custom telescope picker
     local picker_opts = {
       prompt_title = "Find Zettels",
+      initial_mode = opts.mode,
       finder = finders.new_table { 
         results = json, -- results
         entry_maker = neuron_entry.gen_from_zettels -- func to convert results to entries
